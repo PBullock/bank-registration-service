@@ -1,0 +1,16 @@
+server:
+  adminMinThreads: 1
+  adminMaxThreads: 64
+  rootPath: /api/
+  applicationConnectors:
+    - type: http
+      port: 18183
+  adminConnectors:
+    - type: http
+      port: 18184
+consumableValue: ichKannVerwendetWerden
+metrics:
+  reporters:
+    - type: console
+      timeZone: UTC
+      output: stdout
