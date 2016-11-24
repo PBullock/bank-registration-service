@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: http://localhost:18183/api
 
-# rest-transfer-registration
+# bank-transfer-registration
 
 MicroService um Benutzer und Mitarbeiter Kontos zu Steurn (nicht Bankkontos!)
 
@@ -63,3 +63,22 @@ the number is returned in the console instead of by mail for testing purposes
                 "created": "2015-08-05T08:40:51.620Z",
                 "address": "some_address"
             }
+            
+            
+### Edit User [PUT]
+
+Edit a user account details.
+
++ Request (applicaiton/json)
+
+        {
+            "user_id":123,
+            "user_detail1": "blah",
+            "user_detail2" : "blah"
+        }
+
++ Response 201 (pplication/json)
+
+    {
+        
+    }
