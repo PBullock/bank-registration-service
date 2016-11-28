@@ -1,80 +1,84 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://localhost:18183/api
 
-# rest-transfer-registration
+# bank-transfer-registration
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+MicroService um Benutzer und Mitarbeiter Kontos zu Steurn (nicht Bankkontos!)
 
-## Questions Collection [/questions]
+## Benutzer Akitonen [/user]
 
-### List All Questions [GET]
+### Get Benutzer Detailen [GET]
+List users matching search or deliver full details for one user
+
++ Request (application/json)
+
+        {
+            "name":"test_name",
+            "bank_number":123456
+        }
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
+                "name":"test_user1",
+                "bank_number":123456
+            },
+            {
+                "name":"test_name",
+                "bank_number":245689
+            },
         ]
+        
++ Response 401 (application/json)
+        
+        {
+            "messages": [
+                "failure - unauthorized"
+            ]
+        }
 
-### Create a New Question [POST]
+### Create a New User [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+A User is created and a login number assigned (pending approval from mitarbeiter), 
+the number is returned in the console instead of by mail for testing purposes
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "name": "some_name",
+            "adresse": "some_adresse"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /user/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "name": "some_name",
+                "created": "2015-08-05T08:40:51.620Z",
+                "address": "some_address"
             }
+            
+            
+### Edit User [PUT]
+
+Edit a user account details.
+
++ Request (applicaiton/json)
+
+        {
+            "user_id":123,
+            "user_detail1": "blah",
+            "user_detail2" : "blah"
+        }
+
++ Response 201 (pplication/json)
+
+    {
+        
+    }
