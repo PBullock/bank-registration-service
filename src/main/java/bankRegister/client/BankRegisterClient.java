@@ -8,8 +8,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Produces(MediaType.APPLICATION_JSON)
-public class BankRegisterClient {
-
+public class BankRegisterClient
+{
     private Client client;
     public BankRegisterClient(Client client) { this.client = client; }
 

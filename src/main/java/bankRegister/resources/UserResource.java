@@ -1,13 +1,17 @@
 package bankRegister.resources;
 
 import bankRegister.bankRegisterService.UserService;
+import bankRegister.data.UserDataAccess;
+import bankRegister.model.UserModel;
 import org.glassfish.jersey.client.JerseyClient;
 
+import javax.annotation.security.DenyAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 
-@Path("login")
+@Path("register")
 public class UserResource extends JerseyClient
 {
     @Path("/user")
@@ -15,6 +19,9 @@ public class UserResource extends JerseyClient
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerUser()
     {
+        UserDataAccess userDao = new UserDataAccess();
+        ArrayList<UserModel> users = userDao.getUsers();
+
         UserService userService = new UserService("new_user","customer");
         return Response.ok(userService).build();
     }
@@ -40,6 +47,7 @@ public class UserResource extends JerseyClient
     @Path("/user")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @DenyAll
     public Response getUser()
     {
         UserService userService = new UserService("listed_user","customer");

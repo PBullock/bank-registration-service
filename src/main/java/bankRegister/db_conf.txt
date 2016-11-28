@@ -1,0 +1,13 @@
+# SQL_NAME=
+# SQL_PW=4l7bh0gWhoyRPSkmzYBT
+# SQL_PORT=3306
+# SQL_DB=duudl
+# SQL_ADDRESS=duudl.croalcoaxgng.us-west-2.rds.amazonaws.com
+
+
+
+ SQL_NAME=root
+ SQL_PW=
+ SQL_PORT=3306
+ SQL_DB=bank1
+ SQL_ADDRESS=localhost
