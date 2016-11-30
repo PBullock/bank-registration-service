@@ -1,0 +1,84 @@
+FORMAT: 1A
+HOST: http://localhost:18183/api
+
+# bank-transfer-registration
+
+MicroService um Benutzer und Mitarbeiter Kontos zu Steurn (nicht Bankkontos!)
+
+## Benutzer Akitonen [/user]
+
+### Get Benutzer Detailen [GET]
+List users matching search or deliver full details for one user
+
++ Request (application/json)
+
+        {
+            "name":"test_name",
+            "bank_number":123456
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name":"test_user1",
+                "bank_number":123456
+            },
+            {
+                "name":"test_name",
+                "bank_number":245689
+            },
+        ]
+        
++ Response 401 (application/json)
+        
+        {
+            "messages": [
+                "failure - unauthorized"
+            ]
+        }
+
+### Create a New User [POST]
+
+A User is created and a login number assigned (pending approval from mitarbeiter), 
+the number is returned in the console instead of by mail for testing purposes
+
++ Request (application/json)
+
+        {
+            "name": "some_name",
+            "adresse": "some_adresse"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /user/2
+
+    + Body
+
+            {
+                "name": "some_name",
+                "created": "2015-08-05T08:40:51.620Z",
+                "address": "some_address"
+            }
+            
+            
+### Edit User [PUT]
+
+Edit a user account details.
+
++ Request (applicaiton/json)
+
+        {
+            "user_id":123,
+            "user_detail1": "blah",
+            "user_detail2" : "blah"
+        }
+
++ Response 201 (pplication/json)
+
+    {
+        
+    }
