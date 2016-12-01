@@ -3,8 +3,8 @@ package bankRegister.data;
 
 
 
+import bankRegister.bankRegisterService.UserService;
 import bankRegister.model.UserModel;
-import ext.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,6 +68,46 @@ public class UserDataAccess extends DataAccess {
             this.closeConnection();
         }
 
+    }
+
+    public UserService getUser(String kontonummer) {
+        UserService userService = null;
+        try {
+            Connection conn = this.getConnection();
+
+            String sql = "SELECT k.*, a.* " +
+                    "FROM kunden AS k " +
+                    "LEFT JOIN konto AS kon ON kon.Kunden_ID = k.ID " +
+                    "LEFT JOIN adresse AS a ON a.ID = k.Adresse_ID " +
+                    "WHERE kon.Kontonummer = ? AND kon.Hauptkonto = 1";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, kontonummer);
+            stmt.execute();
+            ResultSet r = stmt.getResultSet();
+
+            while(r.next()){
+                userService = new UserService(
+                        r.getString("Nachname"),
+                        r.getString("Vorname"),
+                        r.getString("PLZ"),
+                        r.getString("Ort"),
+                        r.getString("Straße"),
+                        r.getString("Geburtsdatum"),
+                        r.getInt("ID")
+                        );
+            }
+
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }finally {
+            this.closeConnection();
+        }
+        return userService;
     }
 
 }

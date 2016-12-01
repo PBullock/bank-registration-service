@@ -54,9 +54,13 @@ public class UserResource extends JerseyClient
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @DenyAll
-    public Response getUser()
+    public Response getUser(
+            @QueryParam("Kontonummer") String Kontonummer
+    )
     {
-        UserService userService = new UserService("listed_user","customer");
+        UserDataAccess userDao = new UserDataAccess();
+        UserService userService = userDao.getUser(Kontonummer);
+
         return Response.ok(userService).build();
 
     }

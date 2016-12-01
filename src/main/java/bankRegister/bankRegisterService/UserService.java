@@ -17,6 +17,8 @@ public class UserService {
     private String PLZ;
     @JsonProperty
     private String Passwort;
+    @JsonProperty
+    private Integer Kunden_ID;
 
     public UserService (String Nachname, String Vorname) {
         this.Nachname     = Nachname;
@@ -38,6 +40,23 @@ public class UserService {
         this.Strasse      = Strasse;
         this.Geburtsdatum = Geburtsdatum;
         this.Passwort     = Passwort;
+    }
+    public UserService(String Nachname,
+                       String Vorname,
+                       String PLZ,
+                       String Ort,
+                       String Strasse,
+                       String Geburtsdatum,
+                       Integer Kunden_ID
+                       )
+    {
+        this.Nachname     = Nachname;
+        this.Vorname      = Vorname;
+        this.PLZ          = PLZ;
+        this.Ort          = Ort;
+        this.Strasse      = Strasse;
+        this.Geburtsdatum = Geburtsdatum;
+        this.Kunden_ID = Kunden_ID;
     }
 
     public String getVorname() {
@@ -95,4 +114,8 @@ public class UserService {
     public void setPasswort(String passwort) {
         Passwort = passwort;
     }
+
+    public Integer getKunden_ID() { return Kunden_ID; }
+
+    public void setKunden_ID(Integer kunden_ID) { Kunden_ID = kunden_ID; }
 }
