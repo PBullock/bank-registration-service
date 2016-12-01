@@ -17,12 +17,20 @@ public class UserResource extends JerseyClient
     @Path("/user")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response registerUser()
+    public Response registerUser(
+            @FormParam("Nachname") String Nachname,
+            @FormParam("Vorname") String Vorname,
+            @FormParam("PLZ") String PLZ,
+            @FormParam("Ort") String Ort,
+            @FormParam("Strasse") String Strasse,
+            @FormParam("Geburtsdatum") String Geburtsdatum,
+            @FormParam("Passwort") String Passwort
+    )
     {
         UserDataAccess userDao = new UserDataAccess();
-        ArrayList<UserModel> users = userDao.getUsers();
+        userDao.addUser(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort);
 
-        UserService userService = new UserService("new_user","customer");
+        UserService userService = new UserService(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort);
         return Response.ok(userService).build();
     }
 

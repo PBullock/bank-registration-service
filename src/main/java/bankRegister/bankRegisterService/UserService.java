@@ -4,48 +4,92 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserService {
     @JsonProperty
-    private String userName;
-
+    private String Vorname;
     @JsonProperty
-    private String userType;
-
+    private String Nachname;
     @JsonProperty
-    private String userPassword;
+    private String Geburtsdatum;
+    @JsonProperty
+    private String Strasse;
+    @JsonProperty
+    private String Ort;
+    @JsonProperty
+    private String PLZ;
+    @JsonProperty
+    private String Passwort;
 
-    public UserService(String userName, String userType)
+
+
+    public UserService(String Nachname,
+                       String Vorname,
+                       String PLZ,
+                       String Ort,
+                       String Strasse,
+                       String Geburtsdatum,
+                       String Passwort)
     {
-        this.userName = userName;
-        this.userType = userType;
+        this.Nachname     = Nachname;
+        this.Vorname      = Vorname;
+        this.PLZ          = PLZ;
+        this.Ort          = Ort;
+        this.Strasse      = Strasse;
+        this.Geburtsdatum = Geburtsdatum;
+        this.Passwort     = Passwort;
     }
 
-    public UserService(String userName, String userType, String userPassword)
-    {
-        this.userName = userName;
-        this.userType = userType;
-        this.userPassword = userPassword;
+    public String getVorname() {
+        return Vorname;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setVorname(String vorname) {
+        Vorname = vorname;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getNachname() {
+        return Nachname;
     }
 
-    public String getUserType() {
-        return userType;
+    public void setNachname(String nachname) {
+        Nachname = nachname;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public String getGeburtsdatum() {
+        return Geburtsdatum;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public void setGeburtsdatum(String geburtsdatum) {
+        Geburtsdatum = geburtsdatum;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public String getStrasse() {
+        return Strasse;
+    }
+
+    public void setStrasse(String strasse) {
+        Strasse = strasse;
+    }
+
+    public String getOrt() {
+        return Ort;
+    }
+
+    public void setOrt(String ort) {
+        Ort = ort;
+    }
+
+    public String getPLZ() {
+        return PLZ;
+    }
+
+    public void setPLZ(String PLZ) {
+        this.PLZ = PLZ;
+    }
+
+    public String getPasswort() {
+        return Passwort;
+    }
+
+    public void setPasswort(String passwort) {
+        Passwort = passwort;
     }
 }

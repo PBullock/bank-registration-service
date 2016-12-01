@@ -14,7 +14,7 @@ public abstract class DataAccess {
 
     public DataAccess() {
 
-        File file = new File("src/main/bankRegister/db_conf.txt");
+        File file = new File("src/main/java/bankRegister/db_conf.txt");
         InputStream is = null;
         try {
             is = new BufferedInputStream(new FileInputStream(file));
