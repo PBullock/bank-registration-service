@@ -1,2 +1,3 @@
 target/
 br-s.iml
+/src/main/java/bankRegister/db_conf.txt
