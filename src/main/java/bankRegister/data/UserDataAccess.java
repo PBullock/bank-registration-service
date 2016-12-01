@@ -4,10 +4,8 @@ package bankRegister.data;
 
 
 import bankRegister.bankRegisterService.UserService;
-import bankRegister.model.UserModel;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * Created by Peter on 14.06.2016.
@@ -19,8 +17,9 @@ public class UserDataAccess extends DataAccess {
 
     }
 
-    public void addUser(String Nachname,  String Vorname, String PLZ, String Ort, String Strasse, String Geburtsdatum, String Passwort){
+    public Integer addUser(String Nachname, String Vorname, String PLZ, String Ort, String Strasse, String Geburtsdatum, String Passwort){
         Integer Adresse_ID = 0;
+        Integer Kunden_ID = 0;
 
         try {
             Connection conn = this.getConnection();
@@ -41,7 +40,6 @@ public class UserDataAccess extends DataAccess {
             Statement last_address = conn.createStatement();
             last_address.execute(last_address_sql);
             ResultSet r = last_address.getResultSet();
-
             while(r.next()){
                Adresse_ID = r.getInt("ID");
             }
@@ -58,6 +56,16 @@ public class UserDataAccess extends DataAccess {
             s.setInt(5, Adresse_ID);
             s.execute();
 
+
+            String last_kunden_sql = "SELECT max(ID) AS ID FROM kunden";
+            Statement last_kunden = conn.createStatement();
+            last_kunden.execute(last_kunden_sql);
+            ResultSet r_kunden = last_kunden.getResultSet();
+            while(r_kunden.next()){
+                Kunden_ID = r_kunden.getInt("ID");
+            }
+
+
             this.commitTransaction();
 
         } catch (SQLException e) {
@@ -67,7 +75,7 @@ public class UserDataAccess extends DataAccess {
         }finally {
             this.closeConnection();
         }
-
+        return Kunden_ID;
     }
 
     public UserService getUser(String kontonummer) {

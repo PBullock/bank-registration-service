@@ -1,11 +1,15 @@
 package bankRegister.resources;
 
+import bankRegister.bankRegisterService.AccountService;
 import bankRegister.bankRegisterService.UserService;
 import bankRegister.data.UserDataAccess;
 import org.glassfish.jersey.client.JerseyClient;
 
-import javax.annotation.security.DenyAll;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,10 +30,25 @@ public class UserResource extends JerseyClient
     )
     {
         UserDataAccess userDao = new UserDataAccess();
-        userDao.addUser(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort);
+        String ID = userDao.addUser(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort).toString();
 
         UserService userService = new UserService(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort);
-        return Response.ok(userService).build();
+
+        WebTarget target =  this.target("http://localhost:18185/api/"); //account service url
+        target.register(String.class);
+
+        WebTarget resourceTarget = target.path("user/account");
+        Form kontoForm = new Form();
+        kontoForm.param("Dispo", "5000");
+        kontoForm.param("Guthaben", "100");
+        kontoForm.param("Kunden_ID", ID);
+
+        Invocation.Builder invocationBuilder =
+                resourceTarget.request(MediaType.APPLICATION_JSON);
+        Response accountResponse = invocationBuilder.post(Entity.form(kontoForm));
+        Object account = accountResponse.getEntity();
+
+        return Response.ok(account).build();
     }
 
     @Path("/user")
@@ -53,7 +72,6 @@ public class UserResource extends JerseyClient
     @Path("/user")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @DenyAll
     public Response getUser(
             @QueryParam("Kontonummer") String Kontonummer
     )
