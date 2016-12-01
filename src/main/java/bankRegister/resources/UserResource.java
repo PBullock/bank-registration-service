@@ -2,14 +2,12 @@ package bankRegister.resources;
 
 import bankRegister.bankRegisterService.UserService;
 import bankRegister.data.UserDataAccess;
-import bankRegister.model.UserModel;
 import org.glassfish.jersey.client.JerseyClient;
 
 import javax.annotation.security.DenyAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 @Path("register")
 public class UserResource extends JerseyClient

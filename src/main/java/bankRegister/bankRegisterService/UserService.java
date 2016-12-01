@@ -18,7 +18,10 @@ public class UserService {
     @JsonProperty
     private String Passwort;
 
-
+    public UserService (String Nachname, String Vorname) {
+        this.Nachname     = Nachname;
+        this.Vorname      = Vorname;
+    }
 
     public UserService(String Nachname,
                        String Vorname,
