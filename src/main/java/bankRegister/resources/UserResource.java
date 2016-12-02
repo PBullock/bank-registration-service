@@ -25,7 +25,7 @@ public class UserResource extends JerseyClient
     )
     {
         UserDataAccess userDao = new UserDataAccess();
-        String ID = userDao.addUser(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort).toString();
+        Integer ID = userDao.addUser(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, Passwort);
 
         UserService userService = new UserService(Nachname, Vorname, PLZ, Ort, Strasse, Geburtsdatum, ID);
 
