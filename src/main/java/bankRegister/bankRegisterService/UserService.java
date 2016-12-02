@@ -1,7 +1,9 @@
 package bankRegister.bankRegisterService;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 public class UserService {
     @JsonProperty
     private String Vorname;
@@ -19,6 +21,8 @@ public class UserService {
     private String Passwort;
     @JsonProperty
     private Integer Kunden_ID;
+
+    public UserService () {}
 
     public UserService (String Nachname, String Vorname) {
         this.Nachname     = Nachname;
